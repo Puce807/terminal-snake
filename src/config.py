@@ -1,3 +1,4 @@
 
 GRID_SIZE = 17
 
+REFRESH_RATE = 0.2

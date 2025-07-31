@@ -3,9 +3,10 @@
 ## 🧱 Phase 1: Core Game Loop
 - [x] Initialize terminal screen
 - [x] Set up
-- [ ] Input handling 
-- [ ] Snake movement logic
+- [x] Input handling 
+- [x] Snake movement logic
 - [x] Rendering
+- [ ] Snake body logic
 
 ## 🍏 Phase 2: Game Mechanics
 - [ ] Add food spawning logic
