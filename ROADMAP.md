@@ -1,12 +1,11 @@
 # 🐍 Terminal Snake Game – Python Project Roadmap
 
 ## 🧱 Phase 1: Core Game Loop
-- [ ] Initialize terminal screen
-- [ ] Set up
-- [ ] Build main game loop:
-  - [ ] Input handling 
-  - [ ] Snake movement logic
-  - [ ] Rendering
+- [x] Initialize terminal screen
+- [x] Set up
+- [ ] Input handling 
+- [ ] Snake movement logic
+- [x] Rendering
 
 ## 🍏 Phase 2: Game Mechanics
 - [ ] Add food spawning logic
