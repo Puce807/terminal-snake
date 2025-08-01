@@ -10,17 +10,17 @@
 
 ## 🍏 Phase 2: Game Mechanics
 - [x] Add food spawning logic
-- [ ] Detect collisions:
+- [x] Detect collisions:
   - [x] Wall collisions
   - [x] Self collisions
-  - [ ] Food collisions
+  - [x] Food collisions
 - [x] Handle game over 
 
 ## 🎮 Phase 3: Gameplay Improvements
 - [ ] Implement score system
   - [ ] Display score 
-- [ ] Add pause and restart functionality
-- [ ] Show “Game Over” message and prompt to restart
+- [ ] Restart functionality
+- [x] Show “Game Over” message 
 
 ## ✨ Phase 4: Polish & Enhancements
 - [ ] Snake speed increases with score
