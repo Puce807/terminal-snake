@@ -11,9 +11,10 @@
 ## 🍏 Phase 2: Game Mechanics
 - [x] Add food spawning logic
 - [ ] Detect collisions:
-  - [ ] Wall collisions
-  - [ ] Self collisions
-- [ ] Handle game over 
+  - [x] Wall collisions
+  - [x] Self collisions
+  - [ ] Food collisions
+- [x] Handle game over 
 
 ## 🎮 Phase 3: Gameplay Improvements
 - [ ] Implement score system
@@ -25,4 +26,3 @@
 - [ ] Snake speed increases with score
 - [ ] Powerups (e.g. speed boost, slow down, double food)
 - [ ] Multiple difficulty levels
-#

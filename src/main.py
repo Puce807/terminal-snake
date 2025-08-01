@@ -2,6 +2,7 @@ import os
 import random
 import time
 import keyboard
+import pyfiglet
 from rich.console import Console
 
 from config import *
@@ -11,8 +12,12 @@ from logger import *
 os.system("")
 console = Console()
 
+def print_ascii(text):
+    ascii_text = pyfiglet.figlet_format(text, font="big")
+    print(ascii_text)
+
 snake_positions = []
-snake_length = 10
+snake_length = 1
 
 food_positions = []
 food_list = []
@@ -24,30 +29,61 @@ class Snake:
         self.x = 3
         self.y = int(GRID_SIZE/2)
 
+        self.nx, self.ny = 0, 0
+
+    def get_next_position(self):
+        dx, dy = 0, 0
+        if self.direction == 0:
+            dx = 1
+        elif self.direction == 1:
+            dy = -1
+        elif self.direction == 2:
+            dx = -1
+        elif self.direction == 3:
+            dy = 1
+        self.nx = self.x + dx
+        self.ny = self.y + dy
+
+
+    def check_collision(self):
+        # Bounds collision
+        if self.nx < 0 or self.nx >= GRID_SIZE:
+            return True
+        if self.ny < 0 or self.ny >= GRID_SIZE:
+            return True
+
+        # Self collision
+        if (self.nx, self.ny) in snake_positions:
+            return  True
+
+        return False
+
     def move(self):
-        # Future Collision Checks
-        if self.direction == 0: # right
-            self.x += 1
-        elif self.direction == 1: # up
-            self.y -= 1
-        elif self.direction == 2: # left
-            self.x -= 1
-        elif self.direction == 3: # down
-            self.y += 1
+        self.get_next_position()
+        if self.check_collision():
+            return False
         else:
-            return
+            self.x = self.nx
+            self.y = self.ny
+            return True
 
     def update(self):
         if keyboard.is_pressed("d"):
-            self.direction = 0
+            if self.direction != 2:
+                self.direction = 0
         if keyboard.is_pressed("w"):
-            self.direction = 1
+            if self.direction != 3:
+                self.direction = 1
         if keyboard.is_pressed("a"):
-            self.direction = 2
+            if self.direction != 0:
+                self.direction = 2
         if keyboard.is_pressed("s"):
-            self.direction = 3
-        self.move()
+            if self.direction != 1:
+                self.direction = 3
+        if not self.move():
+            return False
         snake_positions.append((self.x, self.y))
+        return True
 
 class Food:
     def __init__(self):
@@ -63,7 +99,10 @@ snake = Snake()
 log("info", "Game Started")
 run = True
 while run:
-    snake.update()
+    if not snake.update():
+        log("info", "Game over")
+        run = False
+        continue
 
     if len(snake_positions) > snake_length:
         snake_positions.pop(0)
@@ -76,10 +115,15 @@ while run:
 
     for i in range(len(grid_lines)):
         console.print(grid_lines[i])
-    move_cursor_up(GRID_SIZE)
+    if run:
+        move_cursor_up(GRID_SIZE)
 
     if keyboard.is_pressed("q"):
         log("info", "Game quit")
         run = False
 
     time.sleep(REFRESH_RATE)
+
+for i in range(GRID_SIZE):
+    print("")
+print_ascii("Game Over!")

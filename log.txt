@@ -1,2 +1,2 @@
-2025-08-01 10:06:20,260 - INFO - Game Started
-2025-08-01 10:06:23,434 - INFO - Game quit
+2025-08-01 10:49:02,759 - INFO - Game Started
+2025-08-01 10:49:05,899 - INFO - Game over
