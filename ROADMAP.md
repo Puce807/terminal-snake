@@ -6,10 +6,10 @@
 - [x] Input handling 
 - [x] Snake movement logic
 - [x] Rendering
-- [ ] Snake body logic
+- [x] Snake body logic
 
 ## 🍏 Phase 2: Game Mechanics
-- [ ] Add food spawning logic
+- [x] Add food spawning logic
 - [ ] Detect collisions:
   - [ ] Wall collisions
   - [ ] Self collisions
@@ -22,8 +22,6 @@
 - [ ] Show “Game Over” message and prompt to restart
 
 ## ✨ Phase 4: Polish & Enhancements
-- [ ] Smooth screen redraws (minimize flicker)
-- [ ] Add sound (optional, using `winsound` or similar)
 - [ ] Snake speed increases with score
 - [ ] Powerups (e.g. speed boost, slow down, double food)
 - [ ] Multiple difficulty levels

@@ -1,16 +1,22 @@
 import os
+import random
 import time
 import keyboard
 from rich.console import Console
 
 from config import *
 from render import *
+from logger import *
 
 os.system("")
 console = Console()
 
 snake_positions = []
-snake_length = 1
+snake_length = 10
+
+food_positions = []
+food_list = []
+food_time = time.time()
 
 class Snake:
     def __init__(self):
@@ -31,7 +37,6 @@ class Snake:
         else:
             return
 
-
     def update(self):
         if keyboard.is_pressed("d"):
             self.direction = 0
@@ -44,23 +49,37 @@ class Snake:
         self.move()
         snake_positions.append((self.x, self.y))
 
+class Food:
+    def __init__(self):
+        self.x = random.randint(0, GRID_SIZE)
+        self.y = random.randint(0, GRID_SIZE)
+        while (self.x, self.y) in snake_positions:
+            self.x = random.randint(0, GRID_SIZE)
+            self.y = random.randint(0, GRID_SIZE)
+        food_positions.append((self.x, self.y))
+
 snake = Snake()
 
+log("info", "Game Started")
 run = True
 while run:
     snake.update()
 
-    grid_lines = draw_grid(GRID_SIZE, snake_positions[-snake_length:])
-
     if len(snake_positions) > snake_length:
-        snake_positions.pop()
+        snake_positions.pop(0)
+
+    if ( time.time() - food_time ) > FOOD_INTERVAL:
+        food_list.append(Food())
+        food_time = time.time()
+
+    grid_lines = draw_grid(GRID_SIZE, snake_positions[-snake_length:], food_positions)
 
     for i in range(len(grid_lines)):
         console.print(grid_lines[i])
     move_cursor_up(GRID_SIZE)
 
     if keyboard.is_pressed("q"):
+        log("info", "Game quit")
         run = False
-
 
     time.sleep(REFRESH_RATE)
