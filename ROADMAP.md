@@ -17,8 +17,8 @@
 - [x] Handle game over 
 
 ## 🎮 Phase 3: Gameplay Improvements
-- [ ] Implement score system
-  - [ ] Display score 
+- [x] Implement score system
+  - [x] Display score 
 - [ ] Restart functionality
 - [x] Show “Game Over” message 
 

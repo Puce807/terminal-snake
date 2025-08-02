@@ -9,8 +9,8 @@ from config import *
 from render import *
 from logger import *
 
-os.system("")
 console = Console()
+os.system("")
 
 def print_ascii(text):
     ascii_text = pyfiglet.figlet_format(text, font="big")
@@ -19,7 +19,10 @@ def print_ascii(text):
 snake_positions = []
 food_positions = []
 food_list = []
+food_count = 0
 food_time = time.time()
+
+score = 0
 
 class Snake:
     def __init__(self):
@@ -115,8 +118,17 @@ class Food:
             food_list.remove(self)
 
             self.dead = True
+            return True
+        return False
 
 snake = Snake()
+
+side_text = [
+    "--- Terminal Snake ---",
+    "",
+    ""
+]
+
 
 log("info", "Game Started")
 os.system('cls' if os.name == 'nt' else 'clear') # Clear screen
@@ -128,22 +140,28 @@ while run:
         continue
 
     for food in food_list[:]:
-        food.collision()
+        if food.collision():
+            food_count -= 1
+            score += 1
 
     if len(snake_positions) > snake.length:
         snake_positions.pop(0)
 
     if ( time.time() - food_time ) > FOOD_INTERVAL:
-        if len(food_list) < MAX_FOOD:
+        if food_count < MAX_FOOD:
             food_list.append(Food())
             food_time = time.time()
+            food_count += 1
 
-    grid_lines = draw_grid(GRID_SIZE, snake_positions[-snake.length:], food_positions)
+    side_text[2] = f"Score: {score}"
 
-    for i in range(len(grid_lines)):
-        console.print(grid_lines[i])
-    if run:
-        move_cursor_up(GRID_SIZE)
+    grid_lines = generate_grid(GRID_SIZE, snake_positions[-snake.length:], food_positions)
+    grid_lines = generate_side_text(grid_lines, side_text)
+
+    for text in grid_lines:
+        console.print(text)
+
+    move_cursor_up(GRID_SIZE)
 
     if keyboard.is_pressed("q"):
         log("info", "Game quit")
