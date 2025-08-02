@@ -23,6 +23,5 @@
 - [x] Show “Game Over” message 
 
 ## ✨ Phase 4: Polish & Enhancements
-- [ ] Snake speed increases with score
-- [ ] Powerups (e.g. speed boost, slow down, double food)
-- [ ] Multiple difficulty levels
+- [x] Snake speed increases with score
+

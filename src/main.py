@@ -12,8 +12,8 @@ from logger import *
 console = Console()
 os.system("")
 
-def print_ascii(text):
-    ascii_text = pyfiglet.figlet_format(text, font="big")
+def print_ascii(in_text):
+    ascii_text = pyfiglet.figlet_format(in_text, font="big")
     print(ascii_text)
 
 snake_positions = []
@@ -23,6 +23,8 @@ food_count = 0
 food_time = time.time()
 
 score = 0
+
+refresh_rate = 0.25
 
 class Snake:
     def __init__(self):
@@ -126,6 +128,8 @@ snake = Snake()
 side_text = [
     "--- Terminal Snake ---",
     "",
+    "",
+    "",
     ""
 ]
 
@@ -148,10 +152,9 @@ while run:
         snake_positions.pop(0)
 
     if ( time.time() - food_time ) > FOOD_INTERVAL:
-        if food_count < MAX_FOOD:
-            food_list.append(Food())
-            food_time = time.time()
-            food_count += 1
+        food_list.append(Food())
+        food_time = time.time()
+        food_count += 1
 
     side_text[2] = f"Score: {score}"
 
@@ -163,11 +166,16 @@ while run:
 
     move_cursor_up(GRID_SIZE)
 
+    if score >= 10:
+        refresh_rate = 0.2
+    if score >= 20:
+        refresh_rate = 0.18
+
     if keyboard.is_pressed("q"):
         log("info", "Game quit")
         run = False
 
-    time.sleep(REFRESH_RATE)
+    time.sleep(refresh_rate)
 
 for i in range(GRID_SIZE):
     print("")
